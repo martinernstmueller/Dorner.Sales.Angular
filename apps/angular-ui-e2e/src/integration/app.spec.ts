@@ -1,4 +1,5 @@
 import { getGreeting } from '../support/app.po';
+import { getAddUserButton, getUsers } from '../support/app.po';
 
 describe('angular-ui', () => {
   beforeEach(() => cy.visit('/'));
@@ -8,6 +9,16 @@ describe('angular-ui', () => {
     cy.login('my-email@something.com', 'myPassword');
 
     // Function helper example, see `../support/app.po.ts` file
-    getGreeting().contains('Welcome to angular-ui!');
+    getGreeting().contains('Welcome to dorner sales!');
+  });
+});
+
+describe('AngularApps', () => {
+  beforeEach(() => cy.visit('/'));
+
+  it('should display todos', () => {
+    getUsers().should((t) => expect(t.length).equal(2));
+    getAddUserButton().click();
+    getUsers().should((t) => expect(t.length).equal(3));
   });
 });
